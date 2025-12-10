@@ -1,0 +1,33 @@
+pipeline{
+    agent any
+    tools{
+        maven 'mymaven'
+    }
+    stages{
+        stage('Checkout Code')
+        {
+            steps{
+                git 'https://github.com/forsharma0607-ops/DevOpsCodeDemo.git'
+            }
+        }
+        stage('Compile'){
+            steps{
+                echo"Compileing Code"
+                sh 'mvn compile'
+            }
+        }
+        stage('Test'){
+            steps{
+                echo"Testing Coede using Junit surefire"
+                sh 'mvn test'
+            }
+        }
+        stage('Package'){
+            steps{
+                echo "Generating atrifact"
+                sh 'mvn package'
+            }
+        }
+    }
+    
+}
